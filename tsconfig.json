@@ -5,6 +5,7 @@
     "moduleResolution": "bundler",
     "strict": true,
     "noEmit": true,
+    "types": ["bun"],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true

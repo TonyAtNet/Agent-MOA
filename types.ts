@@ -28,7 +28,7 @@ export interface CacheEntry {
 export interface ProviderInfo {
   providerID: string
   modelID: string
-  default?: boolean
+  default?: boolean // reserved for Phase B provider integration
 }
 
 export const DEFAULT_AGGREGATOR_PROMPT =

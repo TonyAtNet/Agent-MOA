@@ -59,7 +59,8 @@ export const MoaPlugin: Plugin = async ({ client, directory }) => {
       if (!part.text || part.text.trim().length === 0) return
       if (message.role !== "user") return
 
-      const promptHash = part.text.slice(0, 200)
+      const snippet = part.text.slice(0, 200)
+      const promptHash = Bun.hash(snippet).toString()
       const now = Date.now()
       if (promptHash === lastPromptHash && now - lastPromptTime < DEBOUNCE_MS) return
       lastPromptHash = promptHash

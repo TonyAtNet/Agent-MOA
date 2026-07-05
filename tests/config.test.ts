@@ -69,7 +69,7 @@ describe("autoGenerateConfig", () => {
     const p1 = config.presets.auto.proposers[0].split("/")[0]
     const p2 = config.presets.auto.proposers[1].split("/")[0]
     expect(p1).not.toBe(p2)
-    expect(config.presets.auto.aggregator).toBe("anthropic/claude-sonnet-4")
+    expect(config.presets.auto.aggregator).toBe("anthropic/claude-haiku-4")
     expect(config.presets.auto._auto_generated).toBe(true)
   })
 })

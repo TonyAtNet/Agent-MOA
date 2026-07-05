@@ -15,13 +15,18 @@ export async function proposeOne(
     const session = await client.session.create({
       body: { parentID: parentSessionId },
     })
-    const response = await client.session.prompt({
-      path: { id: session.id },
-      body: {
-        model,
-        parts: [{ type: "text", text: prompt }],
-      },
-    })
+    const response = await Promise.race([
+      client.session.prompt({
+        path: { id: session.id },
+        body: {
+          model,
+          parts: [{ type: "text", text: prompt }],
+        },
+      }),
+      new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error(`timeout after ${timeoutMs}ms`)), timeoutMs)
+      ),
+    ])
     const text = response.data?.parts
       ?.filter((p: any) => p.type === "text")
       .map((p: any) => p.text)
@@ -115,6 +120,7 @@ export async function runMoa(
       parentSessionId
     )
   } catch (e: any) {
+    console.warn(`[opencode-moa] aggregator failed: ${e.message}, falling back to ${successful[0].modelId}`)
     output = successful[0].content
   }
 

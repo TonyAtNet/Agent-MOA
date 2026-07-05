@@ -27,13 +27,18 @@ export function loadConfig(homeDir: string, providers: ProviderInfo[]): MoaConfi
 }
 
 export function autoGenerateConfig(providers: ProviderInfo[]): MoaConfig {
-  const sorted = [...providers]
+  const models = [...providers]
 
   const proposers: [string, string] = [
-    `${sorted[0].providerID}/${sorted[0].modelID}`,
-    findDifferentProvider(sorted[0].providerID, sorted),
+    `${models[0].providerID}/${models[0].modelID}`,
+    findDifferentProvider(models[0].providerID, models),
   ]
-  const aggregator = `${sorted[1].providerID}/${sorted[1].modelID}`
+  let aggregator = `${models[1].providerID}/${models[1].modelID}`
+  if (aggregator === proposers[0] || aggregator === proposers[1]) {
+    if (models.length > 2) {
+      aggregator = `${models[2].providerID}/${models[2].modelID}`
+    }
+  }
 
   return {
     enabled: true,
