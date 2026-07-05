@@ -15,6 +15,20 @@
     "@opencode-ai/sdk": "^1.0.0"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "typescript": "^6.0.3"
+  },
+  "files": [
+    "plugin.ts",
+    "index.ts",
+    "types.ts",
+    "config.ts",
+    "cache.ts",
+    "orchestrator.ts"
+  ],
+  "scripts": {
+    "test": "bun test tests/",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "bun run typecheck && bun run test"
   }
 }
