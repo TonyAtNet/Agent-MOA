@@ -8,7 +8,7 @@
   "keywords": ["opencode", "moa", "mixture-of-agents", "plugin"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/opencode-moa"
+    "url": "https://github.com/TonyAtNet/Agent-MOA.git"
   },
   "dependencies": {
     "@opencode-ai/plugin": "^1.0.0",
